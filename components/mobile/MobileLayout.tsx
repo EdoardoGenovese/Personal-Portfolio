@@ -353,7 +353,7 @@ async function handleSubmit(e: React.SubmitEvent) {
                   rel="noopener noreferrer"
                   className="flex-1 text-center py-2.5 bg-white text-black rounded-full text-xs font-semibold"
                 >
-                  {t.projects.live_demo} <ArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-white transition-colors" />
+                  <span>{t.projects.live_demo}</span> <ArrowUpRight className="w-4 h-4 inline" />
                 </a>
                 <a
                   href="https://github.com/edoardogenovese/jiraffic"
@@ -361,7 +361,7 @@ async function handleSubmit(e: React.SubmitEvent) {
                   rel="noopener noreferrer"
                   className="flex-1 text-center py-2.5 border border-white/20 text-white/60 rounded-full text-xs font-semibold"
                 >
-                  GitHub <ArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-white transition-colors" />
+                  <span>GitHub</span> <ArrowUpRight className="w-4 h-4 inline" />
                 </a>
               </div>
             </div>

@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useInView } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import { useLanguage } from '@/lib/i18n/LanguageContext'
 import { LanguageGlobe } from '@/components/ui/LanguageGlobe'
-import { ArrowDown, X } from 'lucide-react'
+import { ArrowDown, ArrowUpRight, FileText, X } from 'lucide-react'
 
 const ParticleField = dynamic(
   () => import('@/components/three/ParticleField').then((m) => m.ParticleField),
@@ -295,7 +295,7 @@ async function handleSubmit(e: React.SubmitEvent) {
                     transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
                     className="text-3xl text-white/40 group-hover:text-white transition-colors duration-300"
                     >
-                    📄
+                        <FileText className="w-7 h-7 text-white/40 group-hover:text-white transition-colors duration-300" />
                     </motion.div>
                 )}
                 <div className="text-xs text-white/30 tracking-widest uppercase group-hover:text-white/60 transition-colors duration-300">
@@ -353,7 +353,7 @@ async function handleSubmit(e: React.SubmitEvent) {
                   rel="noopener noreferrer"
                   className="flex-1 text-center py-2.5 bg-white text-black rounded-full text-xs font-semibold"
                 >
-                  {t.projects.live_demo} ↗
+                  {t.projects.live_demo} <ArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-white transition-colors" />
                 </a>
                 <a
                   href="https://github.com/edoardogenovese/jiraffic"
@@ -361,7 +361,7 @@ async function handleSubmit(e: React.SubmitEvent) {
                   rel="noopener noreferrer"
                   className="flex-1 text-center py-2.5 border border-white/20 text-white/60 rounded-full text-xs font-semibold"
                 >
-                  GitHub ↗
+                  GitHub <ArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-white transition-colors" />
                 </a>
               </div>
             </div>
@@ -404,7 +404,7 @@ async function handleSubmit(e: React.SubmitEvent) {
                 className="flex items-center justify-between px-5 py-4 border border-white/5 rounded-xl text-sm text-white/50"
               >
                 {link.label}
-                <span>↗</span>
+                <span><ArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-white transition-colors" /></span>
               </a>
             </FadeIn>
           ))}

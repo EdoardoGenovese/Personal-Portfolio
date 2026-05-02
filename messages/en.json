@@ -1,0 +1,14 @@
+{
+  "hero": {
+    "role": "Frontend Engineer",
+    "stack": "React · TypeScript · Next.js",
+    "cta_work": "View Work",
+    "cta_contact": "Get in Touch",
+    "scroll": "Scroll"
+  },
+  "nav": {
+    "work": "Work",
+    "about": "About",
+    "contact": "Contact"
+  }
+}

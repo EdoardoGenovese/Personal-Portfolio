@@ -38,7 +38,7 @@ const projects: Project[] = [
     title: 'Portfolio',
     descKey: 'portfolio_desc',
     stack: ['Three.js', 'Framer Motion', 'Next.js 15', 'TypeScript'],
-    github: 'https://github.com/edoardogenovese/portfolio',
+    github: 'https://github.com/edoardogenovese/personal-portfolio',
     accent: '#f59e0b',
   },
   {

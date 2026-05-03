@@ -33,7 +33,7 @@ export function Contact() {
 
   const links = [
     { label: 'GitHub', href: 'https://github.com/edoardogenovese' },
-    { label: 'LinkedIn', href: 'https://linkedin.com/in/edoardogenovese-308852237' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/edoardogenovese-308852237/' },
     { label: 'Email', href: 'mailto:genovese.edo4rdo@gmail.com' },
   ]
 

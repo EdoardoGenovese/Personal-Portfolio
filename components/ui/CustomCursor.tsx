@@ -25,20 +25,24 @@ export function CustomCursor() {
     function onMouseMove(e: MouseEvent) {
       globalMousePos.x = e.clientX
       globalMousePos.y = e.clientY
-      
+
       cursorX.set(e.clientX)
       cursorY.set(e.clientY)
       trailX.set(e.clientX)
       trailY.set(e.clientY)
     }
 
-    function onMouseEnter() { isHovering.current = true }
-    function onMouseLeave() { isHovering.current = false }
+    function onMouseEnter() {
+      isHovering.current = true
+    }
+    function onMouseLeave() {
+      isHovering.current = false
+    }
 
     window.addEventListener('mousemove', onMouseMove)
 
     const interactables = document.querySelectorAll('a, button, [data-cursor]')
-    interactables.forEach((el) => {
+    interactables.forEach(el => {
       el.addEventListener('mouseenter', onMouseEnter)
       el.addEventListener('mouseleave', onMouseLeave)
     })
@@ -50,7 +54,6 @@ export function CustomCursor() {
 
   return (
     <>
-      {/* Dot principale */}
       <motion.div
         style={{
           x: springX,
@@ -60,7 +63,6 @@ export function CustomCursor() {
         }}
         className="fixed top-0 left-0 w-3 h-3 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference"
       />
-      {/* Ring che segue con lag */}
       <motion.div
         style={{
           x: trailSpringX,

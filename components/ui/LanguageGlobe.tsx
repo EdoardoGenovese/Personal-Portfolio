@@ -52,10 +52,7 @@ export function LanguageGlobe() {
   }
 
   return (
-    <button
-      onClick={handleToggle}
-      className="relative w-12 h-12 cursor-none"
-    >
+    <button onClick={handleToggle} className="relative w-12 h-12 cursor-none">
       <Canvas
         camera={{ position: [0, 0, 2.5], fov: 50 }}
         gl={{ antialias: true, alpha: true }}

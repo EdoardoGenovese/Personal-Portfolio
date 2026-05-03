@@ -7,12 +7,11 @@ import { useFullPage } from '@/lib/FullPageContext'
 import { ArrowDown } from 'lucide-react'
 
 const ParticleField = dynamic(
-  () => import('@/components/three/ParticleField').then((m) => m.ParticleField),
+  () => import('@/components/three/ParticleField').then(m => m.ParticleField),
   { ssr: false }
 )
 
 const letters = 'Edoardo Genovese'.split('')
-
 
 export function Hero() {
   const { goTo } = useFullPage()
@@ -23,7 +22,12 @@ export function Hero() {
       <div className="absolute inset-0 z-0">
         <ParticleField />
       </div>
-      <div className="absolute inset-0 z-10" style={{ background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.8) 100%)' }} />
+      <div
+        className="absolute inset-0 z-10"
+        style={{
+          background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.8) 100%)',
+        }}
+      />
 
       <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-6">
         <motion.div

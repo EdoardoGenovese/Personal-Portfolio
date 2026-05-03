@@ -5,7 +5,6 @@ import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '@/lib/i18n/LanguageContext'
 import { ArrowDown, FileText, X } from 'lucide-react'
 
-// Dialog CV
 function CVDialog({ onClose }: { onClose: () => void }) {
   const { t } = useLanguage()
 
@@ -23,10 +22,9 @@ function CVDialog({ onClose }: { onClose: () => void }) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.85, y: 20 }}
           transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-          onClick={(e) => e.stopPropagation()}
+          onClick={e => e.stopPropagation()}
           className="w-full max-w-sm bg-[#0a0a0a] border border-white/10 rounded-2xl overflow-hidden"
         >
-          {/* Header */}
           <div className="px-6 py-5 border-b border-white/5">
             <div className="flex items-center justify-between">
               <div>
@@ -46,7 +44,7 @@ function CVDialog({ onClose }: { onClose: () => void }) {
             {[
               { lang: 'IT', label: 'Italiano', href: '/cv-edoardo-genovese-it.pdf', delay: 0.05 },
               { lang: 'EN', label: 'English', href: '/cv-edoardo-genovese-en.pdf', delay: 0.1 },
-            ].map((cv) => (
+            ].map(cv => (
               <motion.a
                 key={cv.lang}
                 href={cv.href}
@@ -86,14 +84,10 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
   const isInView = useInView(ref, { once: true })
 
   return (
-    <motion.span
-      ref={ref}
-      initial={{ opacity: 0 }}
-      animate={isInView ? { opacity: 1 } : {}}
-    >
+    <motion.span ref={ref} initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}}>
       <motion.span
         initial={{ innerText: 0 } as any}
-        animate={isInView ? { innerText: value } as any : {}}
+        animate={isInView ? ({ innerText: value } as any) : {}}
         transition={{ duration: 1.5, ease: 'easeOut' }}
         onUpdate={(latest: any) => {
           if (ref.current) {
@@ -114,9 +108,18 @@ export function About() {
   const [cvOpen, setCvOpen] = useState(false)
 
   const skills = [
-    'React', 'TypeScript', 'Next.js', 'Zustand',
-    'TanStack Query', 'Angular', 'Node.js', 'GraphQL',
-    'Tailwind CSS', 'Storybook', 'Cypress', 'Playwright',
+    'React',
+    'TypeScript',
+    'Next.js',
+    'Zustand',
+    'TanStack Query',
+    'Angular',
+    'Node.js',
+    'GraphQL',
+    'Tailwind CSS',
+    'Storybook',
+    'Cypress',
+    'Playwright',
   ]
 
   const stats = [
@@ -126,14 +129,18 @@ export function About() {
   ]
 
   return (
-    <section id="about" ref={ref} className="relative min-h-screen bg-black px-6 py-32 overflow-hidden">
-
+    <section
+      id="about"
+      ref={ref}
+      className="relative min-h-screen bg-black px-6 py-32 overflow-hidden"
+    >
       {cvOpen && <CVDialog onClose={() => setCvOpen(false)} />}
 
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
+          backgroundImage:
+            'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
           backgroundSize: '60px 60px',
         }}
       />
@@ -147,40 +154,27 @@ export function About() {
         >
           <span className="text-xs font-semibold tracking-[0.4em] text-white/20 uppercase">02</span>
           <div className="w-12 h-px bg-white/20" />
-          <span className="text-xs font-semibold tracking-[0.4em] text-white/20 uppercase">{t.nav.about}</span>
+          <span className="text-xs font-semibold tracking-[0.4em] text-white/20 uppercase">
+            {t.nav.about}
+          </span>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
           <div>
-            <motion.h2
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="text-5xl font-bold tracking-tight text-white mb-8 leading-tight"
-            >
-              {t.about.title}
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-white/40 text-base leading-relaxed mb-6"
-            >
-              {t.about.bio1}
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-white/40 text-base leading-relaxed"
-            >
-              {t.about.bio2}
-            </motion.p>
+            {[t.about.bio1, t.about.bio2, t.about.bio3, t.about.bio4].map((bio, i) => (
+              <motion.p
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.1 + i * 0.1 }}
+                className={`text-white/40 text-base leading-relaxed ${i < 3 ? 'mb-5' : ''}`}
+              >
+                {bio}
+              </motion.p>
+            ))}
           </div>
 
           <div className="flex flex-col gap-12">
-
-            {/* Stats grid — 3 quadratini */}
             <div className="grid grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden">
               {stats.map((stat, i) => (
                 <motion.div
@@ -211,7 +205,6 @@ export function About() {
               ))}
             </div>
 
-            {/* Skills */}
             <div>
               <div className="text-xs text-white/20 tracking-widest uppercase mb-4">Stack</div>
               <div className="flex flex-wrap gap-2">
@@ -228,7 +221,6 @@ export function About() {
                 ))}
               </div>
             </div>
-
           </div>
         </div>
       </div>

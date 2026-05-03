@@ -82,19 +82,19 @@ export function FullPageScroll({ sections }: FullPageScrollProps) {
         <motion.div
           key={current}
           custom={directionRef.current}
-          initial={{ 
+          initial={{
             opacity: 0,
             rotateX: directionRef.current > 0 ? 15 : -15,
             scale: 0.95,
             z: -200,
           }}
-          animate={{ 
+          animate={{
             opacity: 1,
             rotateX: 0,
             scale: 1,
             z: 0,
           }}
-          exit={{ 
+          exit={{
             opacity: 0,
             rotateX: directionRef.current > 0 ? -15 : 15,
             scale: 0.95,
@@ -111,7 +111,6 @@ export function FullPageScroll({ sections }: FullPageScrollProps) {
         </motion.div>
       </AnimatePresence>
 
-      {/* Dots */}
       <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2">
         {sections.map((_, i) => (
           <button

@@ -31,13 +31,16 @@ export function FullPageProvider({
   const [direction, setDirection] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
 
-  const goTo = useCallback((index: number) => {
-    if (isAnimating || index < 0 || index >= sectionsCount) return
-    setDirection(index > current ? 1 : -1)
-    setCurrent(index)
-    setIsAnimating(true)
-    setTimeout(() => setIsAnimating(false), 900)
-  }, [isAnimating, current, sectionsCount])
+  const goTo = useCallback(
+    (index: number) => {
+      if (isAnimating || index < 0 || index >= sectionsCount) return
+      setDirection(index > current ? 1 : -1)
+      setCurrent(index)
+      setIsAnimating(true)
+      setTimeout(() => setIsAnimating(false), 900)
+    },
+    [isAnimating, current, sectionsCount]
+  )
 
   return (
     <FullPageContext.Provider value={{ current, goTo, setCurrent, setDirection }}>

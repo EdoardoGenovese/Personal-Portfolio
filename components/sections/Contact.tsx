@@ -12,43 +12,45 @@ export function Contact() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const [form, setForm] = useState({ name: '', email: '', message: '' })
 
-  let currentDate = new Date();
-let year = currentDate.getFullYear();
+  let currentDate = new Date()
+  let year = currentDate.getFullYear()
 
   async function handleSubmit(e: React.SubmitEvent) {
-  e.preventDefault()
-  setStatus('sending')
-  try {
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
-    })
-    if (!res.ok) throw new Error()
-    setStatus('sent')
-  } catch {
-    setStatus('error')
+    e.preventDefault()
+    setStatus('sending')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (!res.ok) throw new Error()
+      setStatus('sent')
+    } catch {
+      setStatus('error')
+    }
   }
-}
 
   const links = [
-    { label: 'GitHub', href: 'https://github.com/edoardogenovese'},
-    { label: 'LinkedIn', href: 'https://linkedin.com/in/edoardogenovese'},
-    { label: 'Email', href: 'mailto:genovese.edo4rdo@gmail.com'},
+    { label: 'GitHub', href: 'https://github.com/edoardogenovese' },
+    { label: 'LinkedIn', href: 'https://linkedin.com/in/edoardogenovese-308852237' },
+    { label: 'Email', href: 'mailto:genovese.edo4rdo@gmail.com' },
   ]
 
   return (
-    <section id="contact" ref={ref} className="relative min-h-screen bg-black px-6 py-32 overflow-hidden">
-
-      {/* Background glow */}
+    <section
+      id="contact"
+      ref={ref}
+      className="relative min-h-screen bg-black px-6 py-32 overflow-hidden"
+    >
       <div
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] opacity-10"
-        style={{ background: 'radial-gradient(ellipse at center bottom, #4f46e5, transparent 70%)' }}
+        style={{
+          background: 'radial-gradient(ellipse at center bottom, #4f46e5, transparent 70%)',
+        }}
       />
 
       <div className="relative max-w-6xl mx-auto">
-
-        {/* Section label */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -63,8 +65,6 @@ let year = currentDate.getFullYear();
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-
-          {/* Left */}
           <div>
             <motion.h2
               initial={{ opacity: 0, y: 40 }}
@@ -110,7 +110,6 @@ let year = currentDate.getFullYear();
             </div>
           </div>
 
-          {/* Right — Form */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -137,7 +136,7 @@ let year = currentDate.getFullYear();
                 {[
                   { key: 'name', type: 'text', label: t.contact.field_name },
                   { key: 'email', type: 'email', label: t.contact.field_email },
-                ].map((field) => (
+                ].map(field => (
                   <div key={field.key} className="flex flex-col gap-2">
                     <label className="text-xs text-white/30 tracking-widest uppercase">
                       {field.label}
@@ -146,7 +145,7 @@ let year = currentDate.getFullYear();
                       type={field.type}
                       required
                       value={form[field.key as keyof typeof form]}
-                      onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
+                      onChange={e => setForm({ ...form, [field.key]: e.target.value })}
                       className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-white/30 transition-colors cursor-none"
                     />
                   </div>
@@ -160,7 +159,7 @@ let year = currentDate.getFullYear();
                     required
                     rows={5}
                     value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
+                    onChange={e => setForm({ ...form, message: e.target.value })}
                     className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-white/30 transition-colors resize-none cursor-none"
                   />
                 </div>
@@ -194,19 +193,14 @@ let year = currentDate.getFullYear();
         </div>
       </div>
 
-      {/* Footer */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ delay: 1 }}
         className="relative max-w-6xl mx-auto mt-32 pt-8 border-t border-white/5 flex items-center justify-between"
       >
-        <span className="text-xs text-white/20 tracking-widest">
-          © {year} Edoardo Genovese
-        </span>
-        <span className="text-xs text-white/20 tracking-widest">
-          Built with Next.js + Three.js
-        </span>
+        <span className="text-xs text-white/20 tracking-widest">© {year} Edoardo Genovese</span>
+        <span className="text-xs text-white/20 tracking-widest">Built with Next.js + Three.js</span>
       </motion.div>
     </section>
   )

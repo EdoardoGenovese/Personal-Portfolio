@@ -580,7 +580,7 @@ export function MobileLayout() {
         <div className="flex flex-col gap-3 mb-12">
           {[
             { label: 'GitHub', href: 'https://github.com/edoardogenovese' },
-            { label: 'LinkedIn', href: 'https://www.linkedin.com/in/edoardogenovese-308852237/' },
+            { label: 'LinkedIn', href: 'https://www.linkedin.com/in/edoardo-genovese-308852237/' },
             { label: 'Email', href: 'mailto:genovese.edo4rdo@gmail.com' },
           ].map((link, i) => (
             <FadeIn key={link.label} delay={0.3 + i * 0.1}>

@@ -30,7 +30,7 @@ export function Navbar() {
       </button>
 
       <div className="flex items-center gap-8">
-        {(['work', 'about', 'contact'] as const).map(key => (
+        {(['about', 'work', 'contact'] as const).map(key => (
           <button
             key={key}
             onClick={() => goTo(sectionMap[key])}

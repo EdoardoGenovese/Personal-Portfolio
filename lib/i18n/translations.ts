@@ -22,6 +22,7 @@ export type Translations = {
     stat_companies: string
     stat_stack: string
     cv_choose: string
+    cv_download: string
   }
   projects: {
     type: string
@@ -67,6 +68,7 @@ export const translations: Record<Locale, Translations> = {
       stat_companies: 'Companies',
       stat_stack: 'Technologies',
       cv_choose: 'Choose your language',
+      cv_download: 'Download CV',
     },
     projects: {
       type: 'Full Stack App',
@@ -120,6 +122,7 @@ export const translations: Record<Locale, Translations> = {
       stat_companies: 'Aziende',
       stat_stack: 'Tecnologie',
       cv_choose: 'Scegli la lingua',
+      cv_download: 'Scarica il CV',
     },
     projects: {
       type: 'App Full Stack',

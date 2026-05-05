@@ -1,8 +1,8 @@
 'use client'
 
-import { useRef, useMemo, useEffect, Suspense } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Text } from '@react-three/drei'
+import { useTexture } from '@react-three/drei'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { Suspense, useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 
 function Particles() {
@@ -67,133 +67,119 @@ function Particles() {
   )
 }
 
-interface PlanetProps {
-  position: [number, number, number]
+interface LogoProps {
+  texturePath: string
   color: string
-  label: string
-  size: number
-  orbitSpeed: number
-  rotationSpeed: number
   orbitRadius: number
+  orbitSpeed: number
   orbitOffset: number
+  verticalOffset: number
+  size: number
 }
 
-import { useTexture } from '@react-three/drei'
-
-function Planet({
-  position,
+function TechLogo({
+  texturePath,
   color,
-  label,
-  size,
-  orbitSpeed,
-  rotationSpeed,
   orbitRadius,
+  orbitSpeed,
   orbitOffset,
-}: PlanetProps) {
+  verticalOffset,
+  size,
+}: LogoProps) {
   const groupRef = useRef<THREE.Group>(null)
-  const planetRef = useRef<THREE.Mesh>(null)
+  const meshRef = useRef<THREE.Mesh>(null)
 
-  const textureUrls: Record<string, string> = {
-    React: '/textures/2k_earth_daymap.jpg',
-    TypeScript: '/textures/2k_moon.jpg',
-    'Next.js': '/textures/2k_mars.jpg',
-    Angular: '/textures/2k_jupiter.jpg',
-  }
-
-  const texture = useTexture(textureUrls[label] ?? textureUrls['React'])
+  const texture = useTexture(texturePath)
 
   useFrame(state => {
     const t = state.clock.getElapsedTime()
-    if (groupRef.current) {
-      groupRef.current.position.x = Math.sin(t * orbitSpeed + orbitOffset) * orbitRadius
-      groupRef.current.position.z = Math.cos(t * orbitSpeed + orbitOffset) * orbitRadius * 0.4
-      groupRef.current.position.y = position[1] + Math.sin(t * 0.3 + orbitOffset) * 0.3
-    }
-    if (planetRef.current) {
-      planetRef.current.rotation.y += rotationSpeed * 0.016
-    }
+    if (!groupRef.current || !meshRef.current) return
+
+    groupRef.current.position.x = Math.sin(t * orbitSpeed + orbitOffset) * orbitRadius
+    groupRef.current.position.z = Math.cos(t * orbitSpeed + orbitOffset) * orbitRadius * 0.5
+    groupRef.current.position.y = verticalOffset + Math.sin(t * 0.4 + orbitOffset) * 0.4
+
+    meshRef.current.rotation.y += 0.01
   })
 
   return (
-    <group ref={groupRef} position={position}>
-      <mesh ref={planetRef}>
-        <sphereGeometry args={[size, 64, 64]} />
-        <meshStandardMaterial map={texture} roughness={0.7} metalness={0.1} />
-        <Text
-          position={[0, 0, size + 0.01]}
-          fontSize={size * 0.35}
-          color="white"
-          anchorX="center"
-          anchorY="middle"
-          outlineWidth={0.02}
-          outlineColor="#000000"
-        >
-          {label}
-        </Text>
+    <group ref={groupRef}>
+      <mesh ref={meshRef}>
+        <planeGeometry args={[size, size]} />
+        <meshBasicMaterial
+          map={texture}
+          transparent
+          alphaTest={0.01}
+          depthWrite={false}
+          side={THREE.DoubleSide}
+        />
       </mesh>
     </group>
   )
 }
 
-const planets: PlanetProps[] = [
+const logos: LogoProps[] = [
   {
-    position: [-3, 1.5, -2],
+    texturePath: '/logos/react.png',
     color: '#61dafb',
-    label: 'React',
-    size: 0.55,
-    orbitSpeed: 0.18,
-    rotationSpeed: 0.4,
     orbitRadius: 3.5,
+    orbitSpeed: 0.2,
     orbitOffset: 0,
+    verticalOffset: 1.2,
+    size: 0.7,
   },
   {
-    position: [3.5, -1, -1],
-    color: '#3178c6',
-    label: 'TypeScript',
-    size: 0.5,
-    orbitSpeed: 0.14,
-    rotationSpeed: 0.3,
+    texturePath: '/logos/nextjs.png',
+    color: '#ffffff',
     orbitRadius: 4,
+    orbitSpeed: 0.15,
     orbitOffset: Math.PI / 2,
+    verticalOffset: -0.8,
+    size: 0.65,
   },
   {
-    position: [-2, -2, -3],
-    color: '#e8e8e8',
-    label: 'Next.js',
-    size: 0.48,
-    orbitSpeed: 0.22,
-    rotationSpeed: 0.5,
-    orbitRadius: 3,
+    texturePath: '/logos/nodejs.png',
+    color: '#539e43',
+    orbitRadius: 3.2,
+    orbitSpeed: 0.25,
     orbitOffset: Math.PI,
+    verticalOffset: 0.3,
+    size: 0.65,
   },
   {
-    position: [2.5, 2, -2],
+    texturePath: '/logos/angular.png',
     color: '#dd1b16',
-    label: 'Angular',
-    size: 0.45,
-    orbitSpeed: 0.16,
-    rotationSpeed: 0.35,
     orbitRadius: 3.8,
+    orbitSpeed: 0.18,
     orbitOffset: Math.PI * 1.5,
+    verticalOffset: -1.5,
+    size: 0.6,
+  },
+  {
+    texturePath: '/logos/typescript.png',
+    color: '#3178c6',
+    orbitRadius: 4.2,
+    orbitSpeed: 0.22,
+    orbitOffset: Math.PI * 0.75,
+    verticalOffset: 1.8,
+    size: 0.6,
   },
 ]
 
 export function ParticleField() {
   return (
-    <Canvas
-      camera={{ position: [0, 0, 8], fov: 75 }}
-      style={{ background: 'transparent' }}
-      gl={{ antialias: true, alpha: true }}
-    >
-      <Suspense fallback>
-        <ambientLight intensity={0.15} />
-        <directionalLight position={[5, 3, 5]} intensity={2} />
-        <pointLight position={[-8, -5, -8]} intensity={0.3} color="#1a3aff" />
+    <Suspense fallback="Loading">
+      <Canvas
+        camera={{ position: [0, 0, 8], fov: 75 }}
+        style={{ background: 'transparent' }}
+        gl={{ antialias: true, alpha: true }}
+      >
+        <ambientLight intensity={0.5} />
         <Particles />
-        {planets.map(planet => (
-          <Planet key={planet.label} {...planet} />
+        {logos.map(logo => (
+          <TechLogo key={logo.texturePath} {...logo} />
         ))}
-      </Suspense>
-    </Canvas>
+      </Canvas>
+    </Suspense>
   )
 }

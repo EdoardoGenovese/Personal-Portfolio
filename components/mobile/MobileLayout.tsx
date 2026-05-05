@@ -343,41 +343,84 @@ export function MobileLayout() {
         </div>
         {cvOpen && <CVDialog onClose={() => setCvOpen(false)} />}
         <FadeIn delay={0.4}>
-          <div className="grid grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden mb-10">
-            {stats.map((stat, i) => (
-              <div
-                key={i}
-                onClick={stat.onClick}
-                className={`bg-black px-6 py-8 text-center flex flex-col items-center justify-center gap-2 ${stat.onClick ? 'cursor-none hover:bg-white/[0.03] transition-colors group' : ''}`}
-              >
-                {stat.value !== null ? (
-                  <div className="text-4xl font-bold text-white">
-                    <Counter value={stat.value} suffix={stat.suffix} />
-                  </div>
-                ) : (
+          <button
+            onClick={() => setCvOpen(true)}
+            className="group relative w-full bg-black border border-white/10 rounded-2xl overflow-hidden my-4"
+          >
+            <motion.div
+              className="absolute inset-0 pointer-events-none"
+              animate={{ backgroundPosition: ['200% 0', '-200% 0'] }}
+              transition={{ repeat: Infinity, duration: 3, ease: 'linear' }}
+              style={{
+                background:
+                  'linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.06) 50%, transparent 60%)',
+                backgroundSize: '200% 100%',
+              }}
+            />
+            <div className="relative flex items-center justify-between px-5 py-5">
+              <div className="flex items-center gap-4">
+                <div className="w-9 h-9 border border-white/10 rounded-xl flex items-center justify-center">
                   <motion.div
-                    animate={{ y: [0, -3, 0] }}
+                    animate={{ y: [0, -2, 0] }}
                     transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-                    className="text-3xl text-white/40 group-hover:text-white transition-colors duration-300"
                   >
-                    <FileText className="w-7 h-7 text-white/40 group-hover:text-white transition-colors duration-300" />
+                    <FileText className="w-4 h-4 text-white/40" />
                   </motion.div>
-                )}
-                <div className="text-xs text-white/30 tracking-widest uppercase group-hover:text-white/60 transition-colors duration-300">
-                  {stat.label}
                 </div>
+                <div className="text-left">
+                  <div className="text-sm font-semibold text-white/70">{t.about.cv_download}</div>
+                  <div className="text-xs text-white/25 mt-0.5 tracking-widest uppercase">
+                    IT · EN · PDF
+                  </div>
+                </div>
+              </div>
+              <motion.div
+                animate={{ x: [0, 3, 0] }}
+                transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+              >
+                <ArrowUpRight className="w-4 h-4 text-white/20" />
+              </motion.div>
+            </div>
+          </button>
+        </FadeIn>
+
+        <FadeIn delay={0.5}>
+          <div className="grid grid-cols-2 gap-px bg-white/5 rounded-2xl overflow-hidden mb-8">
+            {[
+              { value: 3, suffix: '+', label: t.about.stat_years },
+              { value: 10, suffix: '+', label: t.about.stat_stack },
+            ].map((stat, i) => (
+              <div key={i} className="bg-black px-4 py-4 text-center">
+                <div className="text-2xl font-bold text-white mb-1">
+                  {stat.value}
+                  {stat.suffix}
+                </div>
+                <div className="text-xs text-white/30 tracking-widest uppercase">{stat.label}</div>
               </div>
             ))}
           </div>
         </FadeIn>
 
-        <FadeIn delay={0.5}>
-          <div className="text-xs text-white/20 tracking-widest uppercase mb-4">Stack</div>
+        <FadeIn delay={0.6}>
+          <div className="text-xs text-white/20 tracking-widest uppercase mb-3">Stack</div>
           <div className="flex flex-wrap gap-2">
-            {skills.map(skill => (
+            {[
+              'React',
+              'TypeScript',
+              'Next.js',
+              'Zustand',
+              'TanStack Query',
+              'Angular',
+              'Node.js',
+              'GraphQL',
+              'Tailwind CSS',
+              'Storybook',
+              'Cypress',
+              'Playwright',
+            ].map(skill => (
               <span
                 key={skill}
-                className="px-3 py-1.5 border border-white/10 rounded-full text-xs text-white/40"
+                className="px-3 py-1.5 border border-white/10 rounded-full text-xs text-white/50"
               >
                 {skill}
               </span>
@@ -527,8 +570,7 @@ export function MobileLayout() {
                 />
               </motion.div>
             </AnimatePresence>
-          </div>
-          {' '}
+          </div>{' '}
           <div className="flex items-center justify-center gap-2 mt-5 h-4">
             {projects.map((_, i) => (
               <motion.button

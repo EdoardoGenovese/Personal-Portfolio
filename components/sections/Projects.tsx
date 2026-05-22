@@ -32,6 +32,17 @@ const projects: Project[] = [
     accent: '#7c3aed',
   },
   {
+    id: 'yapyap',
+    year: '2026',
+    type: 'Full Stack App',
+    title: 'YapYap',
+    descKey: 'yapyap_desc',
+    stack: ['Node.js', 'Socket.io', 'Prisma', 'Redis', 'Next.js 15', 'TypeScript'],
+    demo: 'https://yapyap-six.vercel.app',
+    github: 'https://github.com/edoardogenovese/yapyap',
+    accent: '#10b981',
+  },
+  {
     id: 'portfolio',
     year: '2026',
     type: 'Portfolio',

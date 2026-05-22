@@ -29,7 +29,10 @@ export type Translations = {
     live_demo: string
     jiraffic_desc: string
     jiraffic_features: string[]
+    yapyap_desc: string
+    yapyap_features: string[]
     portfolio_desc: string
+    portfolio_features: string[]
     wip_desc: string
   }
   contact: {
@@ -83,8 +86,26 @@ export const translations: Record<Locale, Translations> = {
         'Multi-board support',
         'Google OAuth',
       ],
+      yapyap_desc:
+        'Real-time chat app with public and private rooms, file uploads, typing indicators and live presence. Built with a Node.js backend and Socket.io.',
+      yapyap_features: [
+        'Real-time messaging',
+        'Public & private rooms',
+        'File & image uploads',
+        'Typing indicators',
+        'Live user presence',
+        'JWT authentication',
+      ],
       portfolio_desc:
         'Personal portfolio with 3D particle field, full-page scroll animations and bilingual support.',
+      portfolio_features: [
+        '3D interactive particle field',
+        'Full-page scroll with 3D transitions',
+        'Custom cursor with spring physics',
+        'Bilingual IT/EN with 3D globe toggle',
+        'Separate mobile version',
+        'CV download in two languages',
+      ],
       wip_desc: 'Something new is being built. Check back soon.',
     },
     contact: {
@@ -137,8 +158,26 @@ export const translations: Record<Locale, Translations> = {
         'Supporto multi-board',
         'Google OAuth',
       ],
+      yapyap_desc:
+        'App di chat real-time con stanze pubbliche e private, upload di file, indicatore di digitazione e presenza live. Backend Node.js con Socket.io.',
+      yapyap_features: [
+        'Messaggi in tempo reale',
+        'Stanze pubbliche e private',
+        'Upload file e immagini',
+        'Indicatore di digitazione',
+        'Presenza utenti live',
+        'Autenticazione JWT',
+      ],
       portfolio_desc:
         'Portfolio personale con campo di particelle 3D, animazioni full-page scroll e supporto bilingue.',
+      portfolio_features: [
+        'Campo di particelle 3D interattivo',
+        'Full-page scroll con transizioni 3D',
+        'Cursore custom con fisica spring',
+        'Bilingue IT/EN con globo 3D',
+        'Versione mobile separata',
+        'CV scaricabile in due lingue',
+      ],
       wip_desc: 'Qualcosa di nuovo è in costruzione. Torna presto.',
     },
     contact: {
